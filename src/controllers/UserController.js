@@ -1,6 +1,17 @@
 //importando arquivo de conexão com o banco de dados 
 const knex = require("../database/knex");
-//const checkTaskExists = require("../middlewares/checkTaskExists");
+const UserRepository = require("../repositories/userRepository/userRepository");
+const UserCreateService = require("../services/UserServices/UserCreateService");
+const UserListService = require("../services/UserServices/UserListService");
+const UserListByIdService = require("../services/UserServices/UserListByIdService");
+const UpdateUserService = require("../services/UserServices/UpdateUserService");
+
+const userRepository = new UserRepository()
+
+const userCreateService = new UserCreateService(userRepository)
+const userListService = new UserListService(userRepository)
+const userListByIdService = new UserListByIdService(userRepository)
+const updateUserService = new UpdateUserService(userRepository)
 
 //nome da classe
 class UserController {
@@ -9,22 +20,22 @@ class UserController {
     async createUser(req, res) {
         const {name, email, password} = req.body;
         
-        const isAdmin = false;
+        await userCreateService.execute({name, email, password})
 
-        await knex("users").insert({name, email, password, isAdmin});
-        
         return res.status(201).json("Usuário cadastrado com sucesso!!");
     }
 //listar usuarios
     async listUser(req, res) {
-        //await significa aguarde, pool é o arquivo passado anteriormente e query significa consulta.
-        const users = await knex("users")
+        
+        const users = await userListService.execute()
+
         return res.status(200).json(users)
     }
 //selecionar um usuario especifico pelo id
     async listUserById(req, res) {
         const {user_id} = req.params
-        const [user] = await knex("users").where({id: user_id})
+        
+        const user = await userListByIdService.execute({user_id})
 
         return res.status(200).json(user)
     }
@@ -33,7 +44,8 @@ class UserController {
         const {user_id} = req.params
         const {name, email} = req.body
 
-        await knex("users").where({id: user_id}).update({name, email})
+        await updateUserService.execute({name, email, user_id})
+
         return res.status(200).json("Usuário atualizado com sucesso!")
     }
     //atualizar admin do usuario
