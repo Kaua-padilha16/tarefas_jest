@@ -15,11 +15,11 @@ taskRoutes.get("/tasks", taskController.listTask);
 
 taskRoutes.get("/tasks/:id", checkTaskExists, taskController.listTaskById);
 
-taskRoutes.put("/tasks/:id", checkTaskExists, taskController.updateTask);
+taskRoutes.put("/tasks/:task_id", checkTaskExists, taskController.updateTask);
 
-taskRoutes.patch("/tasks/status/:id", checkTaskExists, taskController.updateTaskStatus);
+taskRoutes.patch("/tasks/status/:task_id", checkTaskExists, taskController.updateTaskStatus);
 
-taskRoutes.delete("/tasks/:id", checkTaskExists, taskController.deleteTask);
+taskRoutes.delete("/tasks/:task_id", checkTaskExists, taskController.deleteTask);
 
 //-------------------------------------------------------------------------------//
 
