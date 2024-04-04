@@ -1,6 +1,6 @@
-const UserRepositoryInMemory = require("../repositories/userRepository/UserRepositoryInMemory")
-const UserCreateService = require("../services/UserServices/UserCreateService")
-const UpdateUserService = require("../services/UserServices/UpdateUserService")
+const UserRepositoryInMemory = require("../../repositories/userRepository/UserRepositoryInMemory")
+const UserCreateService = require("../../services/UserServices/UserCreateService")
+const UpdateUserService = require("../../services/UserServices/UpdateUserService")
 
 describe("updateUserService", () => {
     let userRepository = null
@@ -23,8 +23,8 @@ describe("updateUserService", () => {
         userCreated.name = "User updated",
         userCreated.email = "update@gmail.com"
 
-        const updatedUser = await updateUserService.execute({userCreated})
+        const updatedUser = await updateUserService.execute(userCreated)
        
-        expect(updatedUser).toHaveProperty("email", updatedUser.email)
+        expect(updatedUser).toHaveProperty("email", "update@gmail.com")
     })
 })

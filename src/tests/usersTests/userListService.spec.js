@@ -1,6 +1,6 @@
-const UserRepositoryInMemory = require("../repositories/userRepository/UserRepositoryInMemory")
-const UserCreateService = require("../services/UserServices/UserCreateService")
-const UserListService = require("../services/UserServices/UserListService")
+const UserRepositoryInMemory = require("../../repositories/userRepository/UserRepositoryInMemory")
+const UserCreateService = require("../../services/UserServices/UserCreateService")
+const UserListService = require("../../services/UserServices/UserListService")
 
 describe("UserListService", () => {
     let userRepository = null

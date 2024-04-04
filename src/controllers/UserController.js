@@ -5,6 +5,7 @@ const UserCreateService = require("../services/UserServices/UserCreateService");
 const UserListService = require("../services/UserServices/UserListService");
 const UserListByIdService = require("../services/UserServices/UserListByIdService");
 const UpdateUserService = require("../services/UserServices/UpdateUserService");
+const UserDeleteService = require("../services/UserServices/UserDeleteService");
 
 const userRepository = new UserRepository()
 
@@ -12,6 +13,7 @@ const userCreateService = new UserCreateService(userRepository)
 const userListService = new UserListService(userRepository)
 const userListByIdService = new UserListByIdService(userRepository)
 const updateUserService = new UpdateUserService(userRepository)
+const deleteUserService = new UserDeleteService(userRepository)
 
 //nome da classe
 class UserController {
@@ -59,7 +61,8 @@ class UserController {
     async deleteUser(req, res) {
         const {user_id} = req.params
 
-        await knex("users").where({id: user_id}).delete()
+        await deleteUserService.execute({user_id})
+
         return res.status(200).json("Registro deletado com sucesso! Até mais!!")
     }
 }

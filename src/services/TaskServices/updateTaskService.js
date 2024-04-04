@@ -3,8 +3,8 @@ class UpdateTaskService {
     constructor(taskRepository) {
         this.taskRepository = taskRepository
     }
-    async execute({title, description, task_id}) {
-        const updateTask = await this.taskRepository.updateTask({title, description, task_id})
+    async execute({title, description, id}) {
+        const updateTask = await this.taskRepository.updateTask({title, description, id})
         return updateTask
     }
 }

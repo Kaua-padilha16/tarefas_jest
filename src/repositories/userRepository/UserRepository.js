@@ -23,6 +23,9 @@ class UserRepository {
         await knex("users").where({id: user_id}).update({name: user.name, email: user.email})
         return user
     }
+    async deleteUser({user_id}) {
+        return await knex("users").where({id: user_id}).delete()
+    }
 }
 
 module.exports = UserRepository

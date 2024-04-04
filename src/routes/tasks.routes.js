@@ -15,7 +15,7 @@ taskRoutes.get("/tasks", taskController.listTask);
 
 taskRoutes.get("/tasks/:id", checkTaskExists, taskController.listTaskById);
 
-taskRoutes.put("/tasks/:task_id", checkTaskExists, taskController.updateTask);
+taskRoutes.put("/tasks/update/:id", checkTaskExists, taskController.updateTask);
 
 taskRoutes.patch("/tasks/status/:task_id", checkTaskExists, taskController.updateTaskStatus);
 

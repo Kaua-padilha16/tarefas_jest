@@ -43,10 +43,10 @@ class TaskController {
     }
 //atualizar o titulo e a descrição de uma tarefa
     async updateTask(req, res) {
-        const {task_id} = req.params
+        const {id} = req.params
         const {title, description} = req.body
 
-        await updateTaskService.execute({title, description, task_id})
+        await updateTaskService.execute({title, description, id})
 
         return res.status(200).json("registro atualizado com sucesso!")
     }

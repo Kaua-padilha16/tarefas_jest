@@ -16,7 +16,7 @@ class UserRepositoryInMemory {
         return this.users
     }
     async listUserById({user_id}) {
-        const user = this.users.find(user => user.id === user_id)
+        const user = this.users.find(user => user.user_id === user_id)
         return user
     }
     async updateUser({name, email, user_id}) {
@@ -26,6 +26,10 @@ class UserRepositoryInMemory {
         user.email = email ?? user.email
 
         return user
+    }
+    async deleteUser({user_id}) {
+        const index = this.users.findIndex(user => user.user_id === user_id)
+        return this.users.splice(index, 1)
     }
 }
 
